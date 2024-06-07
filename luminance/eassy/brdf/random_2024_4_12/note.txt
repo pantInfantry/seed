@@ -1,0 +1,8 @@
+InterleavedGradientNoise
+https://advances.realtimerendering.com/s2014/index.html
+
+
+float InterleavedGradientNoise( float2 uv, float FrameId )
+|
+|-- 实验中，产生随机数
+    与高频率抖动模式有关

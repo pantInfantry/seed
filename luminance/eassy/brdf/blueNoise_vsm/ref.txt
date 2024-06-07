@@ -1,0 +1,5 @@
+http://abdallagafar.com/publications/zsampler/
+
+Screen-Space Blue-Noise Diffusion of Monte Carlo Sampling Error via Hierarchical Ordering of Pixels
+Abdalla G. M. Ahmed       Peter Wonka
+KAUST, KSA
