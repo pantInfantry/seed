@@ -1,0 +1,12 @@
+https://github.com/AloneMonkey/MonkeyDev
+
+1:NekoJB,  checkra1n
+TrollStore 2.
+
+ based on Dopamine and Fugu15 source code for rootful support
+Utilizing a sophisticated KFD exploit
+semi-untethered,
+palera1n
+Sileo
+
+https://onejailbreak.com/blog/sideloadly/
