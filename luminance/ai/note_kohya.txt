@@ -1,0 +1,11 @@
+
+
+;June 22, 2024 Saturday 09:58:44
+1:训练源模型, lora
+2:DreamBooth, 四大模型之一
+
+3:
+LoRA: Low-Rank Adaptation of Large Language Models
+dward J. Hu*, Yelong Shen*, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, Weizhu Chen
+
+4:https://openai.wiki/sd-lora-train.html
