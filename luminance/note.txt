@@ -10,3 +10,5 @@ palera1n
 Sileo
 
 https://onejailbreak.com/blog/sideloadly/
+
+kohya_ss\kohya_gui\lora_gui.py

@@ -9,3 +9,13 @@ LoRA: Low-Rank Adaptation of Large Language Models
 dward J. Hu*, Yelong Shen*, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, Weizhu Chen
 
 4:https://openai.wiki/sd-lora-train.html
+
+5:
+python.exe kohya_gui.py
+config example.toml
+|
+|-- setup_logging()
+
+lora_tab
+|
+|--kohya_ss\kohya_gui\lora_gui.py
