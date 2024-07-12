@@ -1,0 +1,5 @@
+-- Eric Heitz, unity technologies
+1:对投影后的区域进行采样			p4
+----------------------------------------
+	4.3 重投影半球, Reprojection on the Hemisphere
+	5. Evaluation

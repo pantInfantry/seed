@@ -1,0 +1,6 @@
+1：float ComputeBilateralWeight(), 相似性与权重的积
+1)Kontkanen et al 2004, "Irradiance Filtering for Monte Carlo Ray Tracing
+   法线双边权重
+
+2)Tokoyashi 2015, "Specular Lobe-Aware Filtering and Upsampling for Interactive Indirect Illumination
+   lobe similarity related
