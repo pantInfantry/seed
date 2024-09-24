@@ -15,3 +15,20 @@ LandscapeStreamingProxy_6_4_0
 kspace\unreal_engine\InstalledBuild\Engine\Source\Runtime\Experimental\Chaos\Public\Chaos\AABB.h
 
 memos
+
+www.reddit.com/r/StableDiffusion/comments/xqi1t4/textual_inversion_versus_dreambooth/
+www.reddit.com/r/StableDiffusion/comments/z8w5z2/the_difference_between_dreambooth_models_and/
+www.reddit.com/r/StableDiffusion/comments/xjlv19/comparison_of_dreambooth_and_textual_inversion/
+https://wandb.ai/psuraj/dreambooth/reports/Dreambooth-training-analysis--VmlldzoyNzk0NDc3#textual-inversion-and-dreambooth
+https://ericri.medium.com/ai-art-of-me-textual-inversion-vs-dreambooth-in-stable-diffusion-5e54bb2b881
+
+------------
+data prepare
+shareX , 512 x 512, alt-q
+2)lora_project\images
+3)反推tagger
+4)https://civitai.com/
+
+https://github.com/AUTOMATIC1111/stable-diffusion-webui​github.com/AUTOMATIC1111/stable-diffusion-webui
+
+https://aigccafe.com/

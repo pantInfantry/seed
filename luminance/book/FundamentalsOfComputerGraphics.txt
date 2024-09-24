@@ -1,0 +1,930 @@
+9:the cumulative distribution function?
+8:偏导函数矩阵就是jacobian matrix?
+================================================================================
+7:baroque-looking set of steps
+6:mottled textures
+5: a glossy white ceramic cup
+4:一个fragment会有一个pixel一样的大小吗?
+3:为什么会有sharping这种效果?
+2:过滤器为什么总是要进行一次偏移呢?
+1:巻积的权重函数，这个序列为什么一定要有一个偏移？ i - j?
+================================================================================
+[2023-11-21 16:03:29]
+	    chapter 10 Signal Processing
+
+1:摄像机lens,是一个连续的函数, 关于位置的连续的函数
+  函数就是一种变换，一种处理
+
+2:低频采样，会导致采样到的数据严重失真，与原始数据相差很大
+
+3:moir pattern
+
+       10.2 Convolution
+       10.2.1 Moving Averages
+
+4:权重平均值, weighted average
+
+       10.2.2 Discrete Convolution
+
+5:巻积与平均值有关
+6:两个队列进行巻积:
+  1)第二个队列作为权重
+
+7：i- (i- r)
+ = i - i +r = r => b[r], radius会成为b序列的一个索引? 如果这个索引不存在呢?
+       	      	   b[r+1]
+		   b[r+2r]
+		   2)r是从原点进行计算的
+
+8:b是作为一个过滤器
+
+	巻积过滤器
+
+9:巻积是过滤的基础
+10:权重的和是1, 从而达到不影响原始的信号总和.
+
+11:step function, 两条相对x轴的直线?
+
+12:(i+3)/5 ?
+
+13:d, discrete impluse
+
+      10.2.3 巻积作为移动的过滤器的和 (convolution as a sum of shifted filters)
+14: i - j, 是一种偏移
+
+15:convolution, 偏移后的b序列的和, 且由a序列项进行权重, weighted
+
+		10.2.4 连续函数的卷积(Convolution with Continuous Functions)
+
+16:连续函数的推导，是为了理解出接下来我们要怎么做
+   2)在连续函数间定义convolution
+   3)convolution对应于某一个自变量x.(argument)
+   4)convolution is a moving average. 过滤器会为这个区域提供一个权重
+
+17:连续函数的convolution遵守加法性与结合性
+
+18:tent function, tent map是一样的东西吗
+
+	The Dirac Delta Function
+
+19: discrete impulse d, acted as an identity.
+    dirac impulse, dirac delta function
+    强行定义的一个很奇怪的函数
+    as the identity for continuous convolution
+
+       	   10.2.5 离散-连续卷积(discrete-continuous convolution)
+
+20:采样就是对连续函数的一种离散处理
+21:离散函数到连函数的还原的过程叫作重建, reconstruction
+   这是另一种形式的convolution:
+   1)过滤一个离散队列, 使用一个连续过滤器
+     |
+     |-- 这个连续的过滤器，在代码上，怎样产生?
+
+22:是离散序列项的权重后的和. => 采样的权重和, x附近的i项的a[]权重
+
+23:reconstruction, 可以认为是过滤器的偏移版本。
+   过滤器，应该符合被采样对象的本质，被采样对象的核心性质.
+   ||
+   \/
+   boxfilter 与TAA的离散化性质一致，它们才能配合使用.
+   重建的波形要与原始的被采样的信号的形状一致才行
+   过滤器，其偏移版本的和
+
+24:splines与 discrete-continuous convolution高度相关, why？
+   因为样条是一种discrete 多项式的求各过程.
+   2)uniform splines, B-spline
+   3)样条的参数化曲线 就是样条基础函数的巻积 with control point sequence
+   4)图像的重建，就是b-spline的计算过程?
+
+		10.2.6 超过一维情况下的巻积(convolution in more than one dimension),
+p221
+25: i, i1有什么区别?
+26: b is finitely support filter of radius r, if.
+    finitely supported filter?
+
+27:convolution,就是需要偏移后多重采样，求平均，以到达filter的目的.
+  应用权重后，对采样序进行求和.
+  一维与多维的区别就是索引数量变多了，而已.
+  每增加一维，就是增加一层循环而已
+  过滤器中的每一个索都进行一次偏移
+
+28:平均区域中的，每一个采样的权重的掩码.
+   the mask to determine the weight of each sample in the average.
+29:二维数组级求和, 整个平面下所有的子元素进行求和
+30:无限小的输入区域，作为连续的巻积
+
+================================================================================
+		10.3 巻积过滤(convolution filters)
+
+31:box filter, natural radius 1/2
+  cubic filter, 2?
+
+32:缩放基本的filter
+   1/s = 2/3 => s = 3/2 > 1,
+   x 乘以一个倍数，x的取值范围变大了, 整个函数被拉平
+
+----------------------------------------
+		10.3.1 A Gallery of Convolution Filters
+
+33:Box Filter
+34:the gaussian Filter, 也叫正态分布
+  1)theta, 标准方差, the filter is very smooth
+
+35:filter's width 与 radius是什么区别， 2倍的关系吗?
+
+36:B-样条三次过滤器, (The B-Spline Cubic Filter)
+
+37: The Catmull-Rom Cubic Filter
+
+38: The Mitchell-Netravali cubic filter
+    b-样条与 Catmull-Rom Cubic Filter的组合
+
+
+----------------------------------------
+		10.3.2 过滤器的属性
+
+39:过滤器对信号的响应:
+   the impulse response of a filter
+   信号上的一个脉冲
+
+40:重建函数，继承了filter的连续性(continuity)
+
+	可分离的filter
+
+
+----------------------------------------
+	10.4用于图片的信号处理(Signal processing for Images)
+	10.4.1 使用离散过滤器来进行图片过滤
+	       (Image Filtering Using Discrete Filters)
+41:模糊， low-pass filter的巻积.(box-filter是低通滤波)
+   sharping 是反方向的blur
+
+   	10.4.2 反走样(Antialiasing in image sampling)
+
+42: 图片是一个连续的二维信号, 数据、信息可以认为是一种信号.
+
+        10.4.3 Reconstruction and resampling
+
+43:采样也需要filter
+
+44:resampling filter, 结合了采样时的filter.
+
+	      10.5采样理论(Sampling Theory)
+
+45: an extra set of intellectual tools for
+   reasoning about how to  achieve the best results with the most efficient
+   code.
+
+		10.5.1 The Fourier Transform
+
+46:采样理论的基础
+47:所有频率的正弦波的合成, sinusoids
+   不同的频率应用不同的权重
+   用正弦波合成不同的波形
+
+48:用极限的思想来表达正弦波
+   正弦波频率是方波频率的整数倍
+   2)正弦波可以表达非周期性波形
+
+49:关于频率u的函数=> 频率的fourier transform
+50:IFT, inverse Fourier transform
+
+51:频率与相位 与复数有关
+52:Fourier spectrum
+
+----------------------------------------
+		10.5.2 巻积与Fourier Transform, p243
+		----------------------------------------
+		10.5.3 A gallery of Fourier transforms
+		10.5.4 Dirac Impulses in Sampling Theory
+
+53: impluse => <context of continuous functions and fourier transforms>
+    impluse是一种缩放
+    2)位置与值的乘积
+
+		10.5.5 采样与走样, p246
+
+54:from the frequency domain
+55:Fourier使得在信号上的巻积过滤变得更为清晰
+   它提供了更精确的解释，为什么我们需要过滤，当进行采样与重建时
+----------------------------------------
+		Preventing Aliasing in Sampling
+56:失真的采样不重叠到base spectrum
+
+ 	        重建中阻止走样(preventing aliasing in reconstruction)
+
+57:from the frequency domain perspective,
+
+	        重采样中，阻止失真(preventing Aliasing in Resampling)
+58:重建与采样组合到一起. 构成resampling. 重采样?
+
+----------------------------------------
+		10.5.6 理想的过滤 对比 有用的过滤 (Ideal filters vs. useful filters)
+
+59:频率域分析, following the frequency domain analysis to its logical conclusion
+   2）过滤器是一个盒子? <sampling, reconstruction>
+
+================================================================================
+		chapter 11 Texture Mapping, p255
+1:表面属性随着空间变化而变化
+2:细节需要map到表面上
+  1)产生阴影；反射;提供光照;定义表面形状
+  2)纹理也可存储其它数据
+  3)纹理映射会产生distortion, 这个映射函数的设计很重要.
+  4)映射也是一个采样的过程; resampling
+
+  	       11.1 查找纹理值
+3:映射表面到纹理的函数, 纹理坐标函数, texture coordinate function
+4:坐标映射函数的目标:
+  1)双射性, Bijectivity
+  2)size distortion,颜色的距离差异不能太大
+  3)形状扭曲, shape distortion
+  4)连续性, continuity,不要有缝隙
+
+		11.2.1 几何决定的坐标(Geometrically Determined Coordinates)
+		11.2.3 Tiling, Wrapping Mode, Texture Transformations, p265
+		11.2.4 连续性与缝隙(seams)
+		11.2.5 渲染系统中的纹理坐标(Texture Coordiantes)
+5:rasterizer会插值纹理坐标
+
+		11.3 反走样纹理查找(Antialiasing Texture Lookups)
+		11.3.1 一个像素的足迹(The Footprint of a Pixel)  p270
+
+;December 01, 2023 Friday 10:29:42
+
+6: 纹理上的反走样，复杂性在于，渲染的图片与纹理的动态改变性.
+  2)像素的值是一个区域的平均值
+
+7:纹理空间足迹, space footprint of the pixel.
+  一个像素的采样值，来自纹理数据中的多个值.
+  |
+  |-- 渲染图片中相同大小的方块区域(identically sized square areas)，
+      在纹理空间中，会有相当大的差距.
+      |
+      |-- 因为渲染图片中的相同大小的区域，在屏幕中的位置与角度都不一样，
+          导致其的解析度不一样.
+
+8:纹理的采样，存在三个空间:
+  1)3D空间, pi(3d space) => image space.
+  2)渲染图片空间, theta（3d space) => texture space
+  3)纹理空间
+   两个空间的连接点在于3D空间.
+   |
+   |-- 相当于有两次反方向的采样.
+
+9:一个原函数与逆函数的组合，来完成全部的纹理采样过程.
+
+10:footprint, 就是在纹理空间中的所使用到的数据
+  足迹的均值是问题的核心
+
+11:viewing situation
+   texture coordinate function.
+
+12:物体离摄像机越近, pixel footprint越小
+   较远的像素，反而需要用更多的像素进行求平均.
+
+13:纹理坐标函数 =>  footprint发生变化
+
+14:反走样，平滑线性近似.函数是平滑的.
+
+15:纹理反走样, anti-aliasing, 近似的映射, 图片到纹理,空间的转换
+   一种线笥的2d 在 2d.
+   one-term Taylor series approximation to the function.
+
+16:会有一个导数的求出的 平行的方向. Jacobin matrix?
+   在近似的纹理空间中表达
+   2)导数越大，纹理空间的foot print 越大
+   |
+   |-- a filtered texture sample => at a particular image-space position
+        平行四边形的采样的均值
+
+17:EWA, Elliptical Weighted Averaging
+
+	11.3.2 Reconstruction	p290 ;December 08, 2023 Friday 13:29:52
+
+	11.3.3 Mipmapping
+18:不用运行时采样，直接查询读出
+   mipmap中的值，已经是average之后的值. 与像素footprint一样大.
+   pixel footprint可能依形状的不同而不同
+   ||
+   \/
+   会导致一些 artifacts
+
+14:setting aside for a moment the question of what to do when ....
+
+15:像素覆盖的面积是2的k次方.
+   2)max_column_norm(J)
+
+----------------------------------------
+	11.3.5 Anisotropic Filtering
+16: mipmap, 多次查找，来近似elongated footprint better, approximate
+    基于最短轴进行选取.(shortest axis footprint)
+
+----------------------------------------
+	11.4 纹理映射的应用(Applications of Texture Mapping)
+
+17:映射与采样过滤是什么区别?
+18:纹理是一个非常有用的工具.
+----------------------------------------
+	11.4.1 控制着色参数(Controlling shading parameters)
+
+19:纹理可以用于材质颜色的变化的模拟=> 木头?
+20:镜面反射，镜面粗糙度
+----------------------------------------
+	11.4.2 Normal Maps and Bump Maps
+
+21:tangent space, 表面的正切空间？
+                11.4.3 Displacement Maps, p280
+22:沿法线位置改变顶点位置(tessellate之后移动)
+
+		11.4.4 shadow maps
+23:阴影图，代表点光源的空间.
+   2)shadwo map, 到最近表面的距离, 点光源. 就是perspective projection之后的距离
+      (shadow bias解决阴影闪烁问题)
+      
+      可能就是depth buffer.
+   3)z-buffer追踪的是最近的表面,
+   4)百分比接近过滤(percentage Closer Filtering),解决阴影图边缘处深度值急剧变化的问题
+     有一个多次采样，取平均值的过程.
+
+		11.4.5 Environment Maps
+24:环境贴图用于着色光照效果
+
+25:环境映射，可以绘光线赋值颜色, 没有击中物体的光线追踪器的光线。
+
+26:用于环境反射, reflection mapping
+27:所有的环境光，都用environment map来计算
+   通过monte carlo integration,
+   通过近似点光源集合的环境，rasterization, 
+   2)
+
+
+		11.5 程序化3D纹理, p283.
+28: diffuse reflectance, 反射率，系数
+
+29:3D表面到2d纹理domain的映射 => 3D纹理，定义了RGB值.
+   有一个映射函数,
+   2)适用于雕刻固体媒介. such as a marble sculpture
+
+30: 3D raster images/ volumes
+
+31:3D纹理值通常时实时计算出来的, 因为3D纹理值会占用很大的内存空间.
+
+	        11.5.1 3D Stripe Textures
+32:；两种颜色之间进行振荡, oscillating function.
+     使用sine函数.
+     
+		11.5.2 固体噪声(Solid Noise)
+
+33: birds' eggs color. => Perlin noise.
+
+34:随机值的3D数组
+  |
+  |-- Hermite interpolation
+
+35:虚拟的3D数组 of random vectors.
+
+		11.5.3 Turbulence
+
+36:a pseudofractal turbulence function:
+
+
+================================================================================
+		chapter 12 Data Structures for Graphics, p291
+
+;December 19, 2023 Tuesday 10:49:18
+1:空间数据结构
+  场景图
+  多维数组
+
+2:网格的存储方案
+  网格转换进图形API
+
+3:winged-edge data structure
+  2)子划分, 模型简化
+  3)管理模型， 嵌镶改变 =>子划分、模型简化
+  单模型网格内的数据结构
+
+4:场景图数据结构
+  半边结构, (half-edge structure)
+  用于管理模型,
+
+5:空间数据结构:
+  1)绑定体积体系结构, bounding volume hierarchies
+  2)体系结构空间划分, hierarchical space subdivision
+  3)统一空间子划分, Uniform Space Subdivision
+  4)体系结构子划分, hierarchical space subdivision,
+    (BSP trees)=> 隐藏表面移除
+    |
+    |-- geometry culling;
+        collision detection
+
+6:多维数组,用于分页性能.
+  图形数据交换到磁盘. 主要用于交换数据
+
+  	  12.1 三角形网格(Triangle Meshes)
+
+7:TIN, 三角形不规则网络，　irregular
+8:带宽比存储空间重要
+
+9:网格的一些操作:
+  1)子划分
+  2)网格编辑
+  3)网格压缩
+  |
+  |-- 高效该问相邻信息.
+
+10:网格比不相关的三角形集合，处理起来更高效.
+
+	12.1.1 Mesh Topology
+
+11: manifold, 是一种拓扑结构, topology of a mesh
+    |
+    |-- watertight? 没有缝隙,也没有分离的空间(表面的内部 from the space outside)
+
+12: It also looks like a surface everywhere on the mesh.
+    网格上的每一处像一个表面?
+
+13:manifold, 一种数学概念.
+  每一个边都有两个三角形共享
+  2)每个顶点有一个单个的、完全的循环的三角形，该三角形围绕着它.
+
+14:relaxed manifold conditions:
+  1)每个边被一到两个三角形使用
+  2)每个顶点连接到单边连接的三角形集合
+    三角形集合面要是连接着的
+
+15:A triangulated Mobius band, which is not orientable.
+
+----------------------------------------
+		12.1.2 Indexed Mesh Storage
+p312 ;December 23, 2023 Saturday 18:25:50
+
+16: triangle fan 占用更少的内存.
+
+----------------------------------------
+		12.1.4 用于网格连通性的数据结构
+17:strips, fans, indexed meshes适合表达静态的mesh, 不适合表达，可编辑的mesh.
+
+18:可编性，需要查询其它信息:
+  1)一个三角形的相邻三角形, 3 adjacent triangles
+  2)查询共享某一边的两个三角形
+  3)顶点所共享的面
+  4)顶点所共享的边
+
+19:要具有连接查询能力.
+  查询时间不随数据量的增加而改变
+
+20:边有固定大小的连通性信息
+
+----------------------------------------
+		三角形邻居结构(The Triangle-Neighbor Structure)
+
+----------------------------------------
+		有翅膀的边的结构
+		(The Winged-Edge Structure), p318
+21:在边上，存储连通信息.
+   winged-edge data structure
+   the first-class citizen of the data structure.
+
+----------------------------------------
+		半边结构
+		(The Half-Edge Structure), p321
+----------------------------------------
+		12.2 Scene Graphs
+		12.2.1 In Rasterization
+22: 矩阵栈，构成一个场景图的组织结构.
+
+		12.2.2 In ray tracing
+23:几何表示不改变, 变换的自然应用.
+    光线追踪
+24:射线击中的变换，p325
+
+		12.3 空间数据结构, Spatial Data Structures
+
+25:这种结构用于支持，快速定位一个物体.
+   这会是一种怎样的数据结构?
+   便于快速查找的一种数据结构
+
+26:对象分区, 分组对象进入一个体系结构中
+   空间分区, 划分进不相连的区域.
+             一个对象会距区存在
+
+27:光线追踪，非常依赖这种空间划分结构
+
+28:线性搜索，不适合大空间的大数据
+   2)视锥裁前，碰撞检测也会用这些空间结构
+
+----------------------------------------
+		12.3.1 Bounding Boxes
+----------------------------------------
+		12.3.2 体系结构绑定盒(Hierarchical Bounding Boxes)
+29: 体系结构就是一种组织形式, 可以低价地排除掉空的空间。
+   对紧密的部分，再进行密集的划分
+
+30:这个适应应聚簇结构，没有几何顺序性
+   bvh-node?
+
+31:空间大小相同，物体数不同 => 不平衡树, an unbalanced tree
+----------------------------------------
+		12.3.3 Uniform Spatial Subdivision， p334
+32:grid由一个类表示?
+   |
+   |-- grid中，保存的是一个对象的指针
+----------------------------------------
+		12.3.4 轴对齐二元空间划分
+		(Axis-Aligned Binary space Partitioning)
+
+----------------------------------------
+		12.4 用于可见性的BSP树
+		(BSP Tree for visibility)
+
+----------------------------------------
+		12.4.1 overview of BSP tree Algorithm
+
+		12.4.2 Building the Tree
+
+pL325;January 08, 2024 Monday 17:11:45
+
+33: 一种画家算法,
+----------------------------------------
+		12.4.3 Cutting Triangles
+		12.4.4 Optimizing the Tree
+		12.5 Tiling Multidimensional Arrays
+		12.5.1 One-Level Tiling For 2D Arrays
+		12.5.2 Example:两级Tiling For 3D Arrays
+34:Translation Lookaside Buffer，虚拟内存系统的一部分
+
+35:
+winged-edge data structure
+Directed Edges—
+A Scalable Representation for Triangle Meshes
+Interactive Ray Tracing for Volume
+Visualization (Parker et al., 1999)
+
+================================================================================
+		chapter 13 Sampling.
+1:fair sampling fo unusual spaces => 空间内所有可能的线
+
+2:Monte Carlo integration:
+  1)数值求值复杂的积分(evaluating)
+
+----------------------------------------
+		13.1 Integration
+3:measure: 函数,映射子集到R+
+ 测量是一种映射?
+
+4:zero measure sets
+
+5:积分来计算这个measure.
+  differential areas, 微分的区域
+  ----------------------------------------
+	13.1.1 Measures and Averages, p337
+6:Measure, u
+  average
+  region, 相对于measure
+  积分几何?
+
+7:微分的和就是积分
+8:均值是通过积分的比值来确定的
+================================================================================
+	13.1.2 Example: Measures on the Lines in the 2D Plane
+	
+9:(m,b), 斜截式, slope-intercept
+10:dm, db, 为什么可以成为一个measure
+    1)自变量
+    2)还是测量结果?
+    3)db , y轴的测量? 它是一个常量呀?
+    4)它测量的是一个函数，是整个函数的变化
+      这个变化是由它的关建，决定性的，定义函数的参数决定的
+      ||
+      \/
+      关键参数的变化，就是这个测量，这个变化是以微分的形式进行定义的
+
+    5)dual space
+    6)a slope-intercept space
+       ||
+       \/
+       <theta, b> space
+
+     7)不同的关键变化量，会形成不同的数据集的空间
+        二维数据点集，可以转化关于旋转的角度集合空间
+
+     8)空间本质上，是一种数据集合
+       这个集合下，会有自己的参考系
+
+     9)最后，会形成一个测量，并且是一个微分测量
+     10)为什么一定要加上cosine？ 形成一种稳定，一种常量
+11:a fair measure.
+
+12:normal coordinates, 线的集合转化为一种区域
+   normal之后，参数值在[0,1]之前，可以用theta在正弦与余弦的两个函数下表示，
+   从而降低参数的复杂度
+   ||
+   \/
+   从而能更好地产生随机函数，形成最终的随机直线， 且得到这些函数的均值
+
+----------------------------------------
+		13.1.3 Example:Measure of Lines in 3D
+
+13:朝向用球形坐标表示,
+   (x,y, theta, omiga)
+   x, y是两个平面
+   ||
+   \/
+   3D空间下，被表达成4D实体
+   ||
+   \/
+   也可以在4D空间下，表达一个直线
+
+   13.2.4 Variance, p343
+14:方差与期望值 有关
+   1)随机变量和的方差 <=> 方差的和， 等价
+   |
+   |-- 和的属性，是概率模型分析中使用的一个原因.
+
+15:标准差，方差的平方根
+
+	13.2.5 估计均值(Estimated means)
+
+16: 独立的随机变量的和，很重要
+    随机变量共享一个通用的密度函数
+    |
+    |-- 这样的变量，独立的 单位化的 分布的 随机变量,
+        independent identically distributed random variables
+
+17:E, 也可以是一个估计值, Estimated Means, 和后的均值而已
+
+18:大数定理, law of large numbers:
+   数据足够大，估计值E为1?
+   |
+   |-- 估计值的概率为1?
+
+----------------------------------------
+	13.3 Monte Carlo Integration
+
+19:与积分有关
+   函数的期望值
+   估计值E 等于 积分  (13.4)
+   可以用期望值，来表达积分, 积分 近似于估什值
+   |
+   |-- 积分是通过和来近似的
+
+20:转成一个比例值进行估计.g/p
+   p的选择就叫重要度采样, importance sampling
+
+21:stratified sampling, 分层抽样, 采样
+   像素采样中的抖动，就用到了这个分层采样
+
+22:variance越小，采样函数的效果就会越好
+
+23:方差 for this stratification on I,
+   与采样个数的立方成反比
+
+24:白噪声的每一个区域的方差都是恒定的, constant.
+   大多数函数，在小区域内的方差是比较小的。
+   white noise is special.
+
+----------------------------------------
+	13.3.1 Quasi-Monte Carlo Integration
+
+25:准随机点, quasi-random points.
+   are deterministic
+
+------------------------------------------------
+	13.4 选择随机点, random points
+
+26:生成随机集合
+  或伪随机点 on the unit square, such as distribution ray tracing
+  jittering也是方法之一
+
+----------------------------------------
+	13.4.1 Function Inversion
+27:函数倒置, 函数的逆, 概率的逆
+   相当于换了一种形式，表达原始的随机变量
+
+28:随机变量有着二维的密度, 二维分布函数
+   每一元的比例
+
+----------------------------------------
+	13.4.2 Rejection
+
+29:复杂分布中的随机变量被拒绝?
+
+----------------------------------------
+	13.4.3 Metropolis
+30: 使用desired density 来生成采样,
+    random mutations
+----------------------------------------
+	13.4.4 example: choosing random lines in the square
+31:designing a sampling strategy
+  寻找随机线
+  the process to be fair=> uniformly distributed within the square
+
+----------------------------------------
+	chapter 14 Physics-Based Rendering, p357
+1: a brute force "path tracing" algorithm
+----------------------------------------
+	14.1 光子(photons)
+2:在图形领域只有几何特性，无波动特性
+3:每一种的光的frequency在不同介质中，是不变的
+4：Plank’s Constant
+
+----------------------------------------
+	14.2 平滑金属(Smooth metals)
+5:Fresnel equation,决定了光的反射量.
+  snell's law
+  
+6:法线图是静态的吗？
+  为什么要产生g-buffer?
+  |
+  |-- 为什么要单独产生一个normal map
+      |
+      |-- 屏幕空间下的，整屏的法线图，这个图为什么要实时产生?
+
+动态光源 -> 动态法线图 -> 法线分布函数 -> 特殊的光照效果
+	    	       	  |
+			  |-- pbr的实现基础
+
+前向渲染: 也有pbr的实现基础
+
+7:polarization of light
+
+8:approximation for the fresnel equations,
+  schlick(1994)
+
+----------------------------------------
+	14.3 Smooth Dielectrics
+	14.3.1 Reflectivity of a Dielectric
+9:dispersion, 采虹的实现, refractive indices
+10: energy conservation, 被吸收不再传输
+
+    	14.3.2 Refraction and Beer's Law
+11:Total internal reflection
+
+12:beer's law, 与玻璃的透光率有关
+----------------------------------------
+	14.4 Dielectrics with Subsurface scattering
+
+----------------------------------------
+	14.5 A brute force photon tracer
+	14.5.2 Photon Tracer
+	14.5.3 运动与defocus Blur, motion
+
+13:depth of field
+   defocus blur
+
+   	14.5.4 Reversing Time(逆向时间) p365
+	14.6 Radiometry（辐射度量)
+14:建模整个行为,而不是基于微表面
+15:辐射率, radiance.
+   亮度、颜色，强度
+
+16:辐射度, 单位, SI, 国际系统单位, International System of Units
+17:光是一种传输的能量, a propagating form of energy, joule, J
+
+========================================
+	14.6.1 光谱能量, Spectral Energy
+18:infinitesimal intervals => makes the machinery of calculus available
+
+19:intensive quantity, 密度
+   extensive quantity
+
+   	14.6.2 Power
+20:功率
+
+	14.6.3 Irradiance(辐照度)
+21:radiant exitance, 辐射退出, 反射, irradiance
+	14.6.4 Radiance(辐射率)
+
+22:余弦校正项,  cosine correction term
+----------------------------------------
+	其它辐射度量量 in terms of radiance
+	(Radiometric Quantities), p370
+----------------------------------------
+	14.8 Transport Equation
+	14.9 Materials in Practice
+
+================================================================================
+	chapter 15 Curves
+		-- Michael Gleicher, p384 ;February 29, 2024 Thursday 14:19:12
+
+1:N维空间下的一些间隔的连续的图片
+2:一维空间下的连续的映射， 到维空间下的映射. (时间与点的映射)
+3:间隔区间
+4:曲线的指定方式有三种:
+  1)implicit, an implicit function, f(x,y) = 0;
+     scalar function, returns a single real number?
+
+  2)parametric, 提供一种映射,自由参数到点集合的映射, the map is on the curve
+    参数是对点的索引
+    自由参数的位置的值, free paramter is time => <time, position>
+    (x,y) = f(t)
+    参数函数 => 向量值函数，2D, 函数输出的是一个二维的向量
+
+  3)生成式/程序化, Generative or procedural,
+    生成点的procedure, => subdivision/ fractals(分形)
+
+5:给定的曲线，
+----------------------------------------
+		15.1.1 参数化与重参数化, p385
+1:特定的参数函数 => 曲线
+  2)参数间隔的映射
+
+2:reparameterization, 老参数到新参数的映射
+
+3:arc-length parameterizations, 描述曲线的长度
+----------------------------------------
+		15.1.2 piecewise parametric repressentations., p387
+		(一片一片的参数重表示)
+9: divide-and-conquer,
+
+		15.1.3 spline, 样条
+10:stiff piece of metal, spline
+   总是多项式函数
+
+		15.2 曲线属性, Curve Properties
+11: local, global property of curve
+  1)微分几何，研究局属性, differential property
+    |
+    |-- 连续性,位置, 方向, 曲率(Curvature)
+
+    		15.2.1 连续性, Continuity
+12:曲线一般都是连续的	
+13:第四、第五阶导数的曲线，可以表达出是否会造成turbulence!
+
+		15.3 多项式段, pieces
+		15.3.1 多项式记法(Notation)
+		15.3.2 A line segment
+14: 控制参数会是一个向量
+    p, parameter
+    2)参数的每一个元素是控制点
+
+    3)通过端点来描述线段
+
+15:线段的端点，利于计算出其它参数
+
+16: canonical form 的参数形式，这个形式是由a来表示的
+
+    	      多项式的矩阵形式
+17: 可以把更多的参数，封装到矩阵中，从而实现简洁的表达形式	      
+    |
+    |-- 约束矩阵, constraint matrix, 多项式系数构成的矩阵
+    |
+    |-- basis matrix, 可以求出系数
+
+    	      15.3.3 Beyond Line Segments
+18: 导数描述曲线的改变的方式, 变化形式
+   |
+   |-- 自由参数的导数
+   2)一阶导数表达，曲线的变化方向
+     二阶导数表达，曲线改变方向的速度
+
+19: <位置系数， 一阶导数系数, 二阶导数系数> 可以合在一个矩阵中．
+
+    	      15.3.4 三次曲线的基本矩阵(Basis Matrices for Cubics)
+
+;June 20, 2024 Thursday 21:08:12
+p397
+20:厄米特矩阵, 与Hermite form, 多项式是什么关系
+
+21:Blending functions, 可以描述曲线
+----------------------------------------
+		15.4 Knots
+
+;July 31, 2024 Wednesday 13:15:26
+p400
+22:knots, 一段函数的起始与结束
+  2)piecewise polynomial function,
+    as the sum of basis functions
+    基本函数会被缩放, by a coefficient
+  3)多个knot可以形成一个向量
+
+----------------------------------------
+	15.4.2 Using Independent Pieces, p401
+	15.5 Cubics
+23:二阶导数平滑
+----------------------------------------
+	15.5.1 自然三次曲线, Natural Cubics
+
+;August 08, 2024 Thursday 13:01:33
+p405
+----------------------------------------
+	15.5.2 Hermite Cubics
+	15.5.3 Cardinal Cubics. p406
+24:tension = 0 => Catmull-Rom Splines.
+   |
+   |-- 与导数有关, scaled the derivatives
+
+----------------------------------------
+	15.6 Approximating Curves
+25: Bezier curves, b-spline curves
+26:字体会用这些曲线, 
+27:混合函数 => bernstein basis polynomials
+----------------------------------------
+	几何直觉,
+	Geometric Intuition for Bezier curves, 
+
+;August 15, 2024 Thursday 13:17:42
+p413
