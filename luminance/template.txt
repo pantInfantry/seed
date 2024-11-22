@@ -32,3 +32,6 @@ shareX , 512 x 512, alt-q
 https://github.com/AUTOMATIC1111/stable-diffusion-webui​github.com/AUTOMATIC1111/stable-diffusion-webui
 
 https://aigccafe.com/
+
+-----------------------------------------------------------------
+https://angelica.gitbook.io/hacktricks/macos-hardening/macos-security-and-privilege-escalation/macos-security-protections/macos-code-signing

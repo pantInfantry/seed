@@ -1,0 +1,14 @@
+
+
+;October 31, 2024 Thursday 13:24:13
+1:resign_file(), 与加密有关,key chain.
+  重新签名文件
+  SecIdentityRef, 
+  https://developer.apple.com/documentation/security/secidentity
+  class SecIdentity
+  .cer file
+  |
+  |-- DER, 可区别的编码规则, Distinguished Encoding Rules
+
+2:SecCertificateCopyData()
+  X.509证书  
